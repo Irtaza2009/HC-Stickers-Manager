@@ -1,0 +1,422 @@
+@font-face {
+  font-family: "Mini Wakuwaku";
+  src: url("../public/fonts/mini-wakuwaku.ttf.woff") format("woff");
+}
+
+body {
+  font-family: "Mini Wakuwaku", cursive;
+  background-color: #f6f7f4;
+  color: #4b5f6b;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom right, #e7f0ec, #f6f7f4 80%);
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+  background: #e7f0ec;
+  box-shadow: 0 2px 10px rgba(120, 170, 170, 0.13);
+  color: #5f7c8a;
+}
+
+.username {
+  color: #7ec4b2;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.stickers-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #6b8e7c;
+}
+
+.stickers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.sticker-card {
+  background: #f4f8f7;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(120, 170, 170, 0.13);
+  padding: 1.5rem;
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.sticker-card:hover {
+  transform: translateY(-4px);
+}
+
+.sticker-img {
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  background: #e7f0ec;
+}
+
+.sticker-name {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  color: #4b5f6b;
+}
+
+.sticker-select {
+  border: 2px solid #b7d3c6;
+  border-radius: 12px;
+  padding: 0.4rem;
+  font-family: "Mini Wakuwaku", cursive;
+  margin-bottom: 0.5rem;
+  background: #e7f0ec;
+  color: #4b5f6b;
+}
+
+.wishlist-btn {
+  background: #d3e7e4;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #4b5f6b;
+  transition: all 0.2s;
+}
+
+.wishlist-btn:hover {
+  background: #b7d3c6;
+}
+
+.wishlisted {
+  background: #7ec4b2 !important;
+  color: #fff !important;
+}
+
+.plus-card {
+  justify-content: center;
+  background: #e7f0ec;
+  color: #7ec4b2;
+  border: 2px dashed #7ec4b2;
+}
+
+.plus-icon {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #b7d3c6;
+}
+
+.add-sticker-text {
+  font-size: 1rem;
+  color: #6b8e7c;
+}
+
+.footer {
+  text-align: center;
+  padding: 1.5rem 0 1rem 0;
+  font-size: 1rem;
+  color: #6b8e7c;
+  background: #e7f0ec;
+  box-shadow: 0 -2px 10px rgba(120, 170, 170, 0.07);
+}
+
+.centered {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top right, #e7f0ec, #f6f7f4);
+}
+
+.login-btn {
+  background: #7ec4b2;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(120, 170, 170, 0.13);
+  transition: background 0.3s;
+  border: none;
+}
+
+.login-btn:hover {
+  background: #6b8e7c;
+}
+
+.github-link {
+  color: #4b5f6b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  display: inline-block;
+}
+.github-link:hover {
+  color: #7ec4b2;
+}
+
+/* Popup styling!*/
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(60, 80, 90, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.popup-card {
+  background: #f4f8f7;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(60, 80, 90, 0.13);
+  padding: 2rem;
+  min-width: 340px;
+  max-width: 90vw;
+  font-family: "Mini Wakuwaku", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.popup-sticker-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-height: 220px;
+  overflow-y: auto;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+.popup-sticker-item {
+  background: #e7f0ec;
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s;
+  min-width: 80px;
+}
+
+.popup-sticker-item.selected {
+  border: 2px solid #7ec4b2;
+  background: #d3e7e4;
+}
+
+.popup-sticker-item img {
+  margin-bottom: 0.3rem;
+}
+
+.popup-qty-row {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.popup-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.popup-btn {
+  background: #7ec4b2;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-family: "Mini Wakuwaku", cursive;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.popup-btn:disabled {
+  background: #b7d3c6;
+  cursor: not-allowed;
+}
+
+.popup-btn.cancel {
+  background: #b7d3c6;
+  color: #4b5f6b;
+}
+
+/* Tabs */
+
+.tabs-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.tab-btn {
+  background: #e7f0ec;
+  color: #4b5f6b;
+  border: none;
+  border-radius: 16px;
+  padding: 0.7rem 2rem;
+  font-size: 1.1rem;
+  font-family: "Mini Wakuwaku", cursive;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(120, 170, 170, 0.08);
+  transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn.active {
+  background: #7ec4b2;
+  color: #fff;
+}
+
+/* All stickers! */
+
+.view-all-btn {
+  background: #7ec4b2;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-family: "Mini Wakuwaku", cursive;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(120, 170, 170, 0.08);
+  transition: background 0.2s, color 0.2s;
+  margin-top: 2rem;
+}
+
+.view-all-btn:hover {
+  background: #6b8e7c;
+}
+
+.all-stickers-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.already-have-text {
+  color: #6b8e7c;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 0.7rem;
+  background: #e7f0ec;
+  border-radius: 8px;
+  padding: 0.3rem 1rem;
+  font-family: "Mini Wakuwaku", cursive;
+  box-shadow: 0 2px 8px rgba(120, 170, 170, 0.08);
+}
+
+.back-btn {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  background: #e7f0ec;
+  color: #4b5f6b;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  font-family: "Mini Wakuwaku", cursive;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(120, 170, 170, 0.08);
+  transition: background 0.2s, color 0.2s;
+  z-index: 10;
+}
+
+.back-btn:hover {
+  background: #b7d3c6;
+}
+
+/* Stickers edit part! */
+
+.sticker-qty {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  background: #7ec4b2;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 2px 10px;
+  z-index: 2;
+  font-family: "Mini Wakuwaku", cursive;
+}
+
+.update-icon {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 1.2rem;
+  color: #6b8e7c;
+  cursor: pointer;
+  background: #e7f0ec;
+  border-radius: 50%;
+  padding: 4px 8px;
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.update-icon:hover {
+  background: #b7d3c6;
+}
+
+.update-qty-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.update-btn {
+  background: #7ec4b2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.95rem;
+  font-family: "Mini Wakuwaku", cursive;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.update-btn.cancel {
+  background: #b7d3c6;
+  color: #4b5f6b;
+}

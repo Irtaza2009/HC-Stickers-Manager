@@ -1,1 +1,1 @@
-# HC-Stickers-Manager
+# Hack Club Stickers Collection Manager
