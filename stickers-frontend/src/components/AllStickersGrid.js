@@ -19,9 +19,7 @@ function AllStickersGrid({ stickers, hasSticker, inWishlist, toggleWishlist }) {
               }`}
               onClick={() => toggleWishlist(s.sku)}
             >
-              {inWishlist(s.sku)
-                ? "💖 Remove from Wishlist"
-                : "🌸 Add to Wishlist"}
+              {inWishlist(s.sku) ? "Remove from Wishlist" : "Add to Wishlist"}
             </button>
           )}
         </div>
