@@ -35,8 +35,19 @@ function ProfilePage() {
 
   return (
     <div className="app-container dreamscape-bg">
+      <a
+        href={`https://stickers.irtaza.xyz/`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="back-btn"
+      >
+        ← Back
+      </a>
       <header className="header dreamscape-header">
-        <h1>{profile.name || profile.username}'s Sticker Collection</h1>
+        <h1>
+          <span className="username">{profile.name || profile.username}</span>'s
+          Sticker Collection
+        </h1>
       </header>
 
       <h2 style={{ textAlign: "center", marginTop: "1rem" }}>Owned Stickers</h2>

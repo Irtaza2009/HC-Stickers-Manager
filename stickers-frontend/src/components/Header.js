@@ -15,9 +15,11 @@ function Header({ showAll, setShowAll, username, isProfileView = false }) {
           </h1>
         </>
       ) : isProfileView ? (
-        <h1>
-          Viewing <span className="username">{username}</span>'s Collection
-        </h1>
+        <div>
+          <h1>
+            Viewing <span className="username">{username}</span>'s Collection
+          </h1>
+        </div>
       ) : (
         <div>
           <a
