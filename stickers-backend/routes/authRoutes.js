@@ -61,6 +61,7 @@ router.get("/slack/callback", async (req, res) => {
         avatar: image_72,
         stickers: [],
         wishlist: [],
+        accessToken,
       });
     }
 
