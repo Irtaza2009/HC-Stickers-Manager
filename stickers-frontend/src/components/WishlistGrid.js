@@ -30,7 +30,7 @@ function WishlistGrid({
               className={`wishlist-btn dreamscape-wishlist wishlisted`}
               onClick={() => toggleWishlist(s.sku)}
             >
-              💖 Remove
+              Remove
             </button>
           )}
         </div>

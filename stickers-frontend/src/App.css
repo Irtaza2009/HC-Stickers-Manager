@@ -408,7 +408,6 @@ body {
   font-size: 1.2rem;
   color: #6b8e7c;
   cursor: pointer;
-  background: #e7f0ec;
   border-radius: 50%;
   padding: 4px 8px;
   transition: background 0.2s;
@@ -416,11 +415,12 @@ body {
 }
 
 .update-icon:hover {
-  background: #b7d3c6;
+  color: #b7d3c6;
 }
 
-.update-qty-row {
+.update-qty-col {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.7rem;

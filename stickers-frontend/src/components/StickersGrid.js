@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 function StickersGrid({
   userStickers,
@@ -41,7 +43,7 @@ function StickersGrid({
                   setNewQty(qty);
                 }}
               >
-                &#x21bb;
+                <FontAwesomeIcon icon={faPen} />
               </span>
             )}
 
@@ -54,7 +56,7 @@ function StickersGrid({
             <p className="sticker-name">{s.name}</p>
 
             {!readOnly && editingSku === s.sku && (
-              <div className="update-qty-row">
+              <div className="update-qty-col">
                 <select
                   className="sticker-select"
                   value={newQty}
