@@ -77,7 +77,7 @@ router.get("/slack/callback", async (req, res) => {
     });
 
     // 5. Redirect to frontend sticker collection page
-    res.redirect("http://localhost:3000/"); // update for prod if needed
+    res.redirect("https://stickers.irtaza.xyz/"); // update for prod if needed
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Slack authentication failed");

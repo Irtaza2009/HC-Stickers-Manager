@@ -12,7 +12,9 @@ function Header({ showAll, setShowAll, username }) {
           >
             ← Back
           </button>
-          <h1 className="all-stickers-heading">All Hack Club Stickers</h1>
+          <h1 className="all-stickers-heading">
+            All Hack Club <span className="username">Stickers</span>!
+          </h1>
         </>
       ) : (
         <h1>

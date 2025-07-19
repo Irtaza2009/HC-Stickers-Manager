@@ -10,6 +10,7 @@ function AddStickerPopup({
   setSelectedQty,
   handlePopupSubmit,
   handleClose,
+  activeTab,
 }) {
   if (!show) return null;
 
@@ -31,21 +32,23 @@ function AddStickerPopup({
             </div>
           ))}
         </div>
-        <div className="popup-qty-row">
-          <label htmlFor="popup-qty">Quantity:</label>
-          <select
-            id="popup-qty"
-            value={selectedQty}
-            onChange={(e) => setSelectedQty(parseInt(e.target.value))}
-            disabled={!selectedSticker}
-          >
-            {[...Array(11)].map((_, i) => (
-              <option key={i} value={i}>
-                {i}
-              </option>
-            ))}
-          </select>
-        </div>
+        {activeTab === "stickers" ? (
+          <div className="popup-qty-row">
+            <label htmlFor="popup-qty">Quantity:</label>
+            <select
+              id="popup-qty"
+              value={selectedQty}
+              onChange={(e) => setSelectedQty(parseInt(e.target.value))}
+              disabled={!selectedSticker}
+            >
+              {[...Array(11)].map((_, i) => (
+                <option key={i} value={i}>
+                  {i}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
         <div className="popup-actions">
           <button
             className="popup-btn"

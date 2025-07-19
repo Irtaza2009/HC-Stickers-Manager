@@ -22,23 +22,28 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/user", { withCredentials: true })
+      .get("https://stickers-backend.irtaza.xyz/api/user", {
+        withCredentials: true,
+      })
       .then((res) => setUser(res.data));
     axios
-      .get("http://localhost:5000/api/stickers")
+      .get("https://stickers-backend.irtaza.xyz/api/stickers")
       .then((res) => setStickers(res.data));
   }, []);
 
   const updateSticker = (sku, quantity) => {
     axios
-      .post("http://localhost:5000/api/user/stickers", { sku, quantity })
+      .post("https://stickers-backend.irtaza.xyz/api/user/stickers", {
+        sku,
+        quantity,
+      })
       .then((res) => setUser(res.data))
       .catch((err) => alert("Error updating sticker"));
   };
 
   const toggleWishlist = (sku) => {
     axios
-      .post("http://localhost:5000/api/user/wishlist", { sku })
+      .post("https://stickers-backend.irtaza.xyz/api/user/wishlist", { sku })
       .then((res) => setUser(res.data))
       .catch((err) => alert("Error updating wishlist"));
   };
@@ -62,10 +67,20 @@ function App() {
 
   if (!user)
     return (
-      <div className="centered">
-        <a className="login-btn" href="http://localhost:5000/auth/slack">
-          Login with Slack
-        </a>
+      <div className="app-container dreamscape-bg">
+        <header className="header dreamscape-header">
+          <h1>
+            Hack Club <span className="username">Stickers</span> Manager
+          </h1>
+        </header>
+        <div className="centered">
+          <a
+            className="login-btn"
+            href="https://stickers-backend.irtaza.xyz/auth/slack"
+          >
+            Login with Slack
+          </a>
+        </div>
       </div>
     );
 
@@ -122,6 +137,7 @@ function App() {
               setSelectedQty={setSelectedQty}
               handlePopupSubmit={handlePopupSubmit}
               handleClose={() => setShowPopup(false)}
+              activeTab={activeTab}
             />
             <button
               className="view-all-btn"
@@ -146,3 +162,5 @@ function App() {
 }
 
 export default App;
+
+// make it say hack club stickers manager on homepage
