@@ -1,6 +1,4 @@
-// Header.js
-
-function Header({ showAll, setShowAll, username }) {
+function Header({ showAll, setShowAll, username, isProfileView = false }) {
   return (
     <header className="header dreamscape-header">
       {showAll ? (
@@ -16,11 +14,25 @@ function Header({ showAll, setShowAll, username }) {
             All Hack Club <span className="username">Stickers</span>!
           </h1>
         </>
-      ) : (
+      ) : isProfileView ? (
         <h1>
-          Welcome, <span className="username">{username}</span>!{" "}
-          <span className="wave"></span>
+          Viewing <span className="username">{username}</span>'s Collection
         </h1>
+      ) : (
+        <div>
+          <a
+            href={`https://stickers.irtaza.xyz/u/${username}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="share-link"
+          >
+            Share Profile
+          </a>
+          <h1>
+            Welcome, <span className="username">{username}</span>!{" "}
+            <span className="wave"></span>
+          </h1>
+        </div>
       )}
     </header>
   );

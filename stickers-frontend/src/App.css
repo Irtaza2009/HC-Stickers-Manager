@@ -363,6 +363,28 @@ body {
   background: #b7d3c6;
 }
 
+.share-link {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  background: #e7f0ec;
+  color: #4b5f6b;
+  border: none;
+  border-radius: 12px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1.1rem;
+  font-family: "Mini Wakuwaku", cursive;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(120, 170, 170, 0.08);
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+}
+
+.share-link:hover {
+  background: #b7d3c6;
+}
+
 /* Stickers edit part! */
 
 .sticker-qty {

@@ -1,12 +1,18 @@
 import { useState } from "react";
 
-function StickersGrid({ userStickers, user, updateSticker, handleAddSticker }) {
+function StickersGrid({
+  userStickers,
+  user,
+  updateSticker,
+  handleAddSticker,
+  readOnly = false,
+}) {
   const [editingSku, setEditingSku] = useState(null);
   const [newQty, setNewQty] = useState(1);
 
   return (
     <div className="stickers-grid">
-      {userStickers.length === 0 && (
+      {!readOnly && userStickers.length === 0 && (
         <div
           className="sticker-card plus-card dreamscape-card"
           style={{ cursor: "pointer" }}
@@ -24,19 +30,21 @@ function StickersGrid({ userStickers, user, updateSticker, handleAddSticker }) {
             key={s.sku}
             style={{ position: "relative" }}
           >
-            {/* Quantity top left */}
             <span className="sticker-qty">{qty}</span>
-            {/* Update icon top right */}
-            <span
-              className="update-icon"
-              title="Update quantity"
-              onClick={() => {
-                setEditingSku(s.sku);
-                setNewQty(qty);
-              }}
-            >
-              &#x21bb;
-            </span>
+
+            {!readOnly && (
+              <span
+                className="update-icon"
+                title="Update quantity"
+                onClick={() => {
+                  setEditingSku(s.sku);
+                  setNewQty(qty);
+                }}
+              >
+                &#x21bb;
+              </span>
+            )}
+
             <img
               src={s.picture}
               width={64}
@@ -44,8 +52,8 @@ function StickersGrid({ userStickers, user, updateSticker, handleAddSticker }) {
               className="sticker-img"
             />
             <p className="sticker-name">{s.name}</p>
-            {/* Show select only if editing */}
-            {editingSku === s.sku ? (
+
+            {!readOnly && editingSku === s.sku && (
               <div className="update-qty-row">
                 <select
                   className="sticker-select"
@@ -74,11 +82,11 @@ function StickersGrid({ userStickers, user, updateSticker, handleAddSticker }) {
                   Cancel
                 </button>
               </div>
-            ) : null}
+            )}
           </div>
         );
       })}
-      {userStickers.length > 0 && (
+      {!readOnly && userStickers.length > 0 && (
         <div
           className="sticker-card plus-card dreamscape-card"
           style={{ cursor: "pointer" }}
@@ -91,4 +99,5 @@ function StickersGrid({ userStickers, user, updateSticker, handleAddSticker }) {
     </div>
   );
 }
+
 export default StickersGrid;

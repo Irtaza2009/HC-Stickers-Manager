@@ -1,7 +1,12 @@
-function WishlistGrid({ wishlistStickers, toggleWishlist, handleAddSticker }) {
+function WishlistGrid({
+  wishlistStickers,
+  toggleWishlist,
+  handleAddSticker,
+  readOnly = false,
+}) {
   return (
     <div className="stickers-grid">
-      {wishlistStickers.length === 0 && (
+      {!readOnly && wishlistStickers.length === 0 && (
         <div
           className="sticker-card plus-card dreamscape-card"
           style={{ cursor: "pointer" }}
@@ -13,17 +18,24 @@ function WishlistGrid({ wishlistStickers, toggleWishlist, handleAddSticker }) {
       )}
       {wishlistStickers.map((s) => (
         <div className="sticker-card dreamscape-card" key={s.sku}>
-          <img src={s.picture} width={64} alt={s.name} className="sticker-img" />
+          <img
+            src={s.picture}
+            width={64}
+            alt={s.name}
+            className="sticker-img"
+          />
           <p className="sticker-name">{s.name}</p>
-          <button
-            className={`wishlist-btn dreamscape-wishlist wishlisted`}
-            onClick={() => toggleWishlist(s.sku)}
-          >
-            💖 Remove
-          </button>
+          {!readOnly && (
+            <button
+              className={`wishlist-btn dreamscape-wishlist wishlisted`}
+              onClick={() => toggleWishlist(s.sku)}
+            >
+              💖 Remove
+            </button>
+          )}
         </div>
       ))}
-      {wishlistStickers.length > 0 && (
+      {!readOnly && wishlistStickers.length > 0 && (
         <div
           className="sticker-card plus-card dreamscape-card"
           style={{ cursor: "pointer" }}
@@ -36,4 +48,5 @@ function WishlistGrid({ wishlistStickers, toggleWishlist, handleAddSticker }) {
     </div>
   );
 }
+
 export default WishlistGrid;
