@@ -211,3 +211,5 @@ function App() {
 }
 
 export default App;
+
+// search for stickers
