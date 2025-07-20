@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 function AddStickerPopup({
   show,
@@ -12,14 +14,34 @@ function AddStickerPopup({
   handleClose,
   activeTab,
 }) {
+  const [search, setSearch] = useState("");
+
   if (!show) return null;
+
+  const filteredStickers = stickers.filter((s) =>
+    s.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="popup-overlay">
       <div className="popup-card">
         <h3>Select a Sticker</h3>
+
+        <div className="search-wrapper">
+          <input
+            className="sticker-search"
+            type="text"
+            placeholder="Search stickers..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          <button className="search-button">
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        </div>
+
         <div className="popup-sticker-list">
-          {stickers.map((s) => (
+          {filteredStickers.map((s) => (
             <div
               key={s.sku}
               className={`popup-sticker-item ${
@@ -32,7 +54,8 @@ function AddStickerPopup({
             </div>
           ))}
         </div>
-        {activeTab === "stickers" ? (
+
+        {activeTab === "stickers" && (
           <div className="popup-qty-row">
             <label htmlFor="popup-qty">Quantity:</label>
             <select
@@ -48,7 +71,8 @@ function AddStickerPopup({
               ))}
             </select>
           </div>
-        ) : null}
+        )}
+
         <div className="popup-actions">
           <button
             className="popup-btn"

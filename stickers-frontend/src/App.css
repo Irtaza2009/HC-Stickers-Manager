@@ -443,3 +443,48 @@ body {
   background: #b7d3c6;
   color: #4b5f6b;
 }
+
+/* sticker popup search */
+
+.search-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 8px;
+}
+
+.sticker-search {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 2px solid #c3dccf;
+  width: 60%;
+  max-width: 260px;
+  background-color: #fceef2; /* soft pastel pink */
+  color: #333;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.sticker-search:focus {
+  outline: none;
+  background-color: #fde7ef;
+  border-color: #c3dccf;
+}
+
+.search-button {
+  background-color: #dbeae3; /* pastel green */
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #4b6458;
+  transition: background-color 0.2s ease;
+}
+
+.search-button:hover {
+  background-color: #c3dccf;
+  color: #2f3e36;
+}

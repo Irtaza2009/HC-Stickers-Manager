@@ -18,7 +18,7 @@ function auth(req, res, next) {
     res.status(401).send("Invalid token");
   }
 }
-
+/*
 // 🔁 Sync stickers from Hack Club
 router.get("/sync", async (req, res) => {
   try {
@@ -28,6 +28,40 @@ router.get("/sync", async (req, res) => {
 
     for (let s of data.items) {
       await Sticker.updateOne({ sku: s.sku }, { $set: s }, { upsert: true });
+    }
+
+    res.send("✅ Stickers synced!");
+  } catch (err) {
+    console.error("Sticker sync failed:", err.message);
+    res.status(500).send("Failed to sync stickers");
+  }
+});
+*/
+
+// 🔁 Sync stickers from @dld's Hack Club stickers API!
+router.get("/sync", async (req, res) => {
+  try {
+    const { data } = await axios.get(
+      "https://stickers.dld.hackclub.app/api/all"
+    );
+
+    const items = data.items;
+
+    for (let item of items) {
+      // Generate a SKU from the name
+      const sku = item.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "-") // Replace non-alphanumerics with hyphens
+        .replace(/-+/g, "-") // Replace multiple hyphens with one
+        .replace(/^-|-$/g, ""); // Trim hyphens
+
+      const sticker = {
+        name: item.name,
+        picture: item.picture,
+        sku,
+      };
+
+      await Sticker.updateOne({ sku }, { $set: sticker }, { upsert: true });
     }
 
     res.send("✅ Stickers synced!");
