@@ -212,4 +212,6 @@ function App() {
 
 export default App;
 
-// search for stickers
+// small stickers size
+// allow more than 10
+// filter

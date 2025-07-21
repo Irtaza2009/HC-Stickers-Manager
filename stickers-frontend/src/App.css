@@ -199,6 +199,8 @@ body {
   padding: 2rem;
   min-width: 340px;
   max-width: 90vw;
+  max-height: 80vh;
+  min-height: 70vh;
   font-family: "Mini Wakuwaku", cursive;
   display: flex;
   flex-direction: column;
@@ -209,7 +211,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  max-height: 220px;
+  max-height: 60vh;
   overflow-y: auto;
   margin: 1rem 0;
   justify-content: center;

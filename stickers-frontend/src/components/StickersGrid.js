@@ -57,17 +57,18 @@ function StickersGrid({
 
             {!readOnly && editingSku === s.sku && (
               <div className="update-qty-col">
-                <select
+                <input
+                  type="number"
                   className="sticker-select"
+                  min="0"
+                  max="999"
                   value={newQty}
-                  onChange={(e) => setNewQty(parseInt(e.target.value))}
-                >
-                  {[...Array(11)].map((_, i) => (
-                    <option key={i} value={i}>
-                      {i}
-                    </option>
-                  ))}
-                </select>
+                  onChange={(e) => {
+                    const value = parseInt(e.target.value) || 0;
+                    setNewQty(Math.max(0, Math.min(999, value)));
+                  }}
+                />
+
                 <button
                   className="update-btn"
                   onClick={() => {

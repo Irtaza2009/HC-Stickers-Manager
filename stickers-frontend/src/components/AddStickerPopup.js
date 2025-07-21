@@ -49,7 +49,12 @@ function AddStickerPopup({
               }`}
               onClick={() => setSelectedSticker(s)}
             >
-              <img src={s.picture} alt={s.name} width={48} />
+              <img
+                src={s.picture}
+                alt={s.name}
+                width={96}
+                className="sticker-img"
+              />
               <span>{s.name}</span>
             </div>
           ))}
@@ -58,18 +63,15 @@ function AddStickerPopup({
         {activeTab === "stickers" && (
           <div className="popup-qty-row">
             <label htmlFor="popup-qty">Quantity:</label>
-            <select
+            <input
+              type="number"
               id="popup-qty"
               value={selectedQty}
+              min="0"
+              max="999"
               onChange={(e) => setSelectedQty(parseInt(e.target.value))}
               disabled={!selectedSticker}
-            >
-              {[...Array(11)].map((_, i) => (
-                <option key={i} value={i}>
-                  {i}
-                </option>
-              ))}
-            </select>
+            />
           </div>
         )}
 
