@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import StickersGrid from "../components/StickersGrid";
 import WishlistGrid from "../components/WishlistGrid";
+import Footer from "../components/Footer";
 
 function ProfilePage() {
   const { username } = useParams();
@@ -55,6 +56,7 @@ function ProfilePage() {
 
       <h2 style={{ textAlign: "center", marginTop: "2rem" }}>Wishlist</h2>
       <WishlistGrid wishlistStickers={wishlistStickers} readOnly />
+      <Footer />
     </div>
   );
 }

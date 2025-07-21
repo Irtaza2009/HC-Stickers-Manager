@@ -181,6 +181,7 @@ function App() {
                   Login with Slack
                 </a>
               </div>
+              <Footer />
             </div>
           ) : (
             <MainStickerManager
@@ -212,6 +213,5 @@ function App() {
 
 export default App;
 
-// small stickers size
-// allow more than 10
-// filter
+// TODO:
+// used stickers list!
