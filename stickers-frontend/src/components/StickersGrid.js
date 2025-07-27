@@ -48,7 +48,7 @@ function StickersGrid({
             )}
 
             <img
-              src={s.picture}
+              src={s.picture || s.pictureData}
               width={64}
               alt={s.name}
               className="sticker-img"

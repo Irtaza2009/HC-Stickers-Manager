@@ -48,7 +48,7 @@ function AllStickersGrid({ stickers, hasSticker, inWishlist, toggleWishlist }) {
         {filteredStickers.map((s) => (
           <div className="sticker-card dreamscape-card" key={s.sku}>
             <img
-              src={s.picture}
+              src={s.picture || s.pictureData}
               width={96}
               alt={s.name}
               className="sticker-img"
