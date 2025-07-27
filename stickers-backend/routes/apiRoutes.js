@@ -45,7 +45,7 @@ async function convertImageUrlToBase64(url) {
 
     const resizedBuffer = await sharp(response.data)
       .resize({ width: 300 }) // Resize to 300px width
-      .jpeg({ quality: 70 }) // Compress to JPEG
+      .toFormat("png")
       .toBuffer();
 
     return `data:image/jpeg;base64,${resizedBuffer.toString("base64")}`;
