@@ -5,7 +5,7 @@ const User = require("../models/User");
 
 const router = express.Router();
 
-// 🔗 Redirect to Slack OAuth
+// Redirect to Slack OAuth
 router.get("/slack", (req, res) => {
   const redirectUrl = `https://slack.com/oauth/v2/authorize?client_id=${
     process.env.SLACK_CLIENT_ID
@@ -15,7 +15,7 @@ router.get("/slack", (req, res) => {
   res.redirect(redirectUrl);
 });
 
-// 🔐 Slack OAuth Callback
+// Slack OAuth Callback
 router.get("/slack/callback", async (req, res) => {
   const code = req.query.code;
   if (!code) return res.status(400).send("Authorization code is missing");
@@ -85,7 +85,7 @@ router.get("/slack/callback", async (req, res) => {
   }
 });
 
-// 🚪 Log out route
+// Log out route
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,
