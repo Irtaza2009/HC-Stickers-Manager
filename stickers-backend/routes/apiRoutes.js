@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const axios = require("axios");
 const User = require("../models/User");
 const Sticker = require("../models/Sticker");
+const sharp = require("sharp");
 
 const router = express.Router();
 
@@ -38,17 +39,21 @@ router.get("/sync", async (req, res) => {
 });
 */
 
-const fetchImageAsBase64 = async (url) => {
+async function convertImageUrlToBase64(url) {
   try {
     const response = await axios.get(url, { responseType: "arraybuffer" });
-    const contentType = response.headers["content-type"];
-    const base64 = Buffer.from(response.data).toString("base64");
-    return `data:${contentType};base64,${base64}`;
+
+    const resizedBuffer = await sharp(response.data)
+      .resize({ width: 300 }) // Resize to 300px width
+      .jpeg({ quality: 70 }) // Compress to JPEG
+      .toBuffer();
+
+    return `data:image/jpeg;base64,${resizedBuffer.toString("base64")}`;
   } catch (err) {
-    console.error("Failed to fetch image:", url, err.message);
+    console.error("Failed to convert image with sharp:", url, err.message);
     return null;
   }
-};
+}
 
 router.get("/sync", async (req, res) => {
   try {
@@ -63,7 +68,7 @@ router.get("/sync", async (req, res) => {
         .replace(/-+/g, "-")
         .replace(/^-|-$/g, "");
 
-      const base64Image = await fetchImageAsBase64(item.picture);
+      const base64Image = await convertImageUrlToBase64(item.picture);
 
       const sticker = {
         name: item.name,
@@ -75,7 +80,7 @@ router.get("/sync", async (req, res) => {
       await Sticker.updateOne({ sku }, { $set: sticker }, { upsert: true });
     }
 
-    res.send("Stickers synced with embedded images!");
+    res.send("Stickers synced with base64-optimized images!");
   } catch (err) {
     console.error("Sticker sync failed:", err.message);
     res.status(500).send("Failed to sync stickers");
