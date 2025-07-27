@@ -45,12 +45,19 @@ function MainStickerManager({
 
   const inWishlist = (sku) => user.wishlist.includes(sku);
 
+  const ownedCount = userStickers.length;
+  const totalStickers = stickers.length;
+  const percentOwned = ((ownedCount / totalStickers) * 100).toFixed(1);
+
   return (
     <div className="app-container dreamscape-bg">
       <Header
         showAll={showAll}
         setShowAll={setShowAll}
         username={user.username}
+        ownedCount={ownedCount}
+        totalStickers={totalStickers}
+        percentOwned={percentOwned}
       />
       <main className="main-content">
         {!showAll ? (
@@ -215,3 +222,9 @@ export default App;
 
 // TODO:
 // used stickers list!
+// done:
+
+/*
+Now you can input quantities of more than 10! And the sticker pop-up is now taller, and the sticker card bigger! Also added a filter to only view stickers you don't have in the all stickers tab!
+ And added a footer!
+ */

@@ -34,6 +34,12 @@ function ProfilePage() {
     profile.wishlist.includes(s.sku)
   );
 
+  const ownedCount = userStickers.length;
+  const totalStickers = stickers.length;
+  const percentOwned = totalStickers
+    ? ((ownedCount / totalStickers) * 100).toFixed(1)
+    : 0;
+
   return (
     <div className="app-container dreamscape-bg">
       <a
@@ -49,6 +55,18 @@ function ProfilePage() {
           <span className="username">{profile.name || profile.username}</span>'s
           Sticker Collection
         </h1>
+        <div className="progress-container">
+          <div className="progress-label">
+            {ownedCount}/{totalStickers} Stickers Collected ({percentOwned}
+            %)
+          </div>
+          <div className="progress-bar">
+            <div
+              className="progress"
+              style={{ width: `${percentOwned}%` }}
+            ></div>
+          </div>
+        </div>
       </header>
 
       <h2 style={{ textAlign: "center", marginTop: "1rem" }}>Owned Stickers</h2>

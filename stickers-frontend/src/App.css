@@ -490,3 +490,36 @@ body {
   background-color: #c3dccf;
   color: #2f3e36;
 }
+
+/*Progress bar*/
+
+.progress-container {
+  position: relative;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.progress-label {
+  font-size: 0.95rem;
+  color: #4b5f6b;
+  margin-bottom: 0.4rem;
+}
+
+.progress-bar {
+  background: #e0dede;
+  height: 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress {
+  height: 100%;
+  background: linear-gradient(to right, #ffd6e0, #d4e7ff);
+  transition: width 0.4s ease;
+}
