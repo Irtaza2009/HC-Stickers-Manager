@@ -50,9 +50,14 @@ function AddStickerPopup({
               onClick={() => setSelectedSticker(s)}
             >
               <img
-                src={s.picture || s.pictureData}
+                src={s.picture}
+                onError={(e) => {
+                  if (s.pictureData) {
+                    e.target.src = s.pictureData;
+                  }
+                }}
+                width={64}
                 alt={s.name}
-                width={96}
                 className="sticker-img"
               />
               <span>{s.name}</span>

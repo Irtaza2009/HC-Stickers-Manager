@@ -19,7 +19,12 @@ function WishlistGrid({
       {wishlistStickers.map((s) => (
         <div className="sticker-card dreamscape-card" key={s.sku}>
           <img
-            src={s.picture || s.pictureData}
+            src={s.picture}
+            onError={(e) => {
+              if (s.pictureData) {
+                e.target.src = s.pictureData;
+              }
+            }}
             width={64}
             alt={s.name}
             className="sticker-img"

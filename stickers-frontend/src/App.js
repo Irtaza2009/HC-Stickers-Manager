@@ -222,10 +222,3 @@ export default App;
 
 // TODO:
 // used stickers list!
-// done:
-
-/*
-Now you can input quantities of more than 10! And the sticker pop-up is now taller, and the sticker card bigger! Also added a filter to only view stickers you don't have in the all stickers tab!
- And added a footer!
-And added a cool progress bar so you can track your stickers collection!
-*/

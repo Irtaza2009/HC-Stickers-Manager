@@ -21,7 +21,6 @@ router.get("/slack/callback", async (req, res) => {
   if (!code) return res.status(400).send("Authorization code is missing");
 
   try {
-    // 1. Exchange code for access token
     const response = await axios.post(
       "https://slack.com/api/oauth.v2.access",
       null,
@@ -41,7 +40,6 @@ router.get("/slack/callback", async (req, res) => {
 
     const accessToken = response.data.authed_user.access_token;
 
-    // 2. Fetch Slack user info
     const userInfo = await axios.get("https://slack.com/api/users.identity", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
@@ -52,7 +50,6 @@ router.get("/slack/callback", async (req, res) => {
 
     const { id, name, image_72 } = userInfo.data.user;
 
-    // 3. Find or create user
     let user = await User.findOne({ slackId: id });
     if (!user) {
       user = await User.create({
@@ -65,7 +62,6 @@ router.get("/slack/callback", async (req, res) => {
       });
     }
 
-    // 4. Create JWT & Set Cookie
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
@@ -77,15 +73,14 @@ router.get("/slack/callback", async (req, res) => {
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     });
 
-    // 5. Redirect to frontend sticker collection page
-    res.redirect("https://stickers.irtaza.xyz/"); // update for prod if needed
+    res.redirect("https://stickers.irtaza.xyz/"); // will update for prod if needed
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Slack authentication failed");
   }
 });
 
-// Log out route
+// Log out route (haven't used this currently)
 router.post("/logout", (req, res) => {
   res.clearCookie("token", {
     httpOnly: true,

@@ -22,11 +22,11 @@ app.use(
   })
 );
 
-// Use Routes
+// Routes
 app.use("/auth", authRoutes);
 app.use("/api", apiRoutes);
 
 // Start Server
 app.listen(process.env.PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${process.env.PORT}`);
+  console.log(`Server running on http://localhost:${process.env.PORT}`);
 });
