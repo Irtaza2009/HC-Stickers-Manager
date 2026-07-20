@@ -10,6 +10,8 @@ import TabsRow from "./components/TabsRow";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import ProfilePage from "./pages/ProfilePage";
+import LoadingScreen from "./components/LoadingScreen";
+import { preloadStickerImages } from "./utils/preloadStickerImages";
 
 axios.defaults.withCredentials = true;
 
@@ -120,18 +122,33 @@ function App() {
   const [selectedQty, setSelectedQty] = useState(1);
   const [activeTab, setActiveTab] = useState("stickers");
   const [showAll, setShowAll] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("https://stickers-backend.irtaza.xyz/api/user", {
-        withCredentials: true,
-      })
-      .then((res) => setUser(res.data))
-      .catch(() => setUser(null));
+    let isCurrent = true;
 
-    axios
-      .get("https://stickers-backend.irtaza.xyz/api/stickers")
-      .then((res) => setStickers(res.data));
+    async function loadApp() {
+      const [userResult, stickersResult] = await Promise.allSettled([
+        axios.get("https://stickers-backend.irtaza.xyz/api/user", {
+          withCredentials: true,
+        }),
+        axios.get("https://stickers-backend.irtaza.xyz/api/stickers"),
+      ]);
+
+      const loadedStickers =
+        stickersResult.status === "fulfilled" ? stickersResult.value.data : [];
+      await preloadStickerImages(loadedStickers);
+
+      if (!isCurrent) return;
+      setUser(userResult.status === "fulfilled" ? userResult.value.data : null);
+      setStickers(loadedStickers);
+      setIsLoading(false);
+    }
+
+    loadApp();
+    return () => {
+      isCurrent = false;
+    };
   }, []);
 
   const updateSticker = (sku, quantity) => {
@@ -173,7 +190,9 @@ function App() {
       <Route
         path="/"
         element={
-          !user ? (
+          isLoading ? (
+            <LoadingScreen />
+          ) : !user ? (
             <div className="app-container dreamscape-bg">
               <header className="header dreamscape-header">
                 <h1>

@@ -4,27 +4,44 @@ import axios from "axios";
 import StickersGrid from "../components/StickersGrid";
 import WishlistGrid from "../components/WishlistGrid";
 import Footer from "../components/Footer";
+import LoadingScreen from "../components/LoadingScreen";
+import { preloadStickerImages } from "../utils/preloadStickerImages";
 
 function ProfilePage() {
   const { username } = useParams();
   const [profile, setProfile] = useState(null);
   const [stickers, setStickers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get(`https://stickers-backend.irtaza.xyz/api/user/${username}`)
-      .then((res) => {
-        setProfile(res.data);
-      });
+    let isCurrent = true;
 
-    axios
-      .get("https://stickers-backend.irtaza.xyz/api/stickers")
-      .then((res) => {
-        setStickers(res.data);
-      });
+    async function loadProfile() {
+      const [profileResult, stickersResult] = await Promise.allSettled([
+        axios.get(`https://stickers-backend.irtaza.xyz/api/user/${username}`),
+        axios.get("https://stickers-backend.irtaza.xyz/api/stickers"),
+      ]);
+      const loadedStickers =
+        stickersResult.status === "fulfilled" ? stickersResult.value.data : [];
+      await preloadStickerImages(loadedStickers);
+
+      if (!isCurrent) return;
+      setProfile(profileResult.status === "fulfilled" ? profileResult.value.data : null);
+      setStickers(loadedStickers);
+      setIsLoading(false);
+    }
+
+    loadProfile();
+    return () => {
+      isCurrent = false;
+    };
   }, [username]);
 
-  if (!profile) return <div>Loading profile...</div>;
+  if (isLoading) return <LoadingScreen label="Loading this collection" />;
+
+  if (!profile) {
+    return <div className="profile-message">This profile could not be found.</div>;
+  }
 
   const userStickers = stickers.filter((s) =>
     profile.stickers.some((us) => us.sku === s.sku && us.quantity > 0)
