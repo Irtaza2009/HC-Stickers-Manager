@@ -539,8 +539,8 @@ body {
   --paper: #fbfaf7;
   --canvas: #f1f1ed;
   --line: #d8ddd8;
-  --accent: #ec3750;
-  --accent-dark: #c42d43;
+  --accent: #7ec4b2;
+  --accent-dark: #5e9f8f;
   --navy: #1f2d3d;
 }
 
@@ -551,6 +551,12 @@ body {
 
 .app-container {
   background: var(--canvas);
+}
+
+.dashboard-shell {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .header {
@@ -575,6 +581,8 @@ body {
   width: min(1120px, 100%);
   margin: 0 auto;
   padding: 2rem 1.25rem 3rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .tabs-row {
@@ -773,7 +781,7 @@ body {
 .sticker-search:focus {
   background: var(--paper);
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(236, 55, 80, 0.13);
+  box-shadow: 0 0 0 3px rgba(126, 196, 178, 0.25);
 }
 
 .search-button {
@@ -792,6 +800,65 @@ body {
   border-radius: 12px;
   box-shadow: 0 18px 48px rgba(20, 28, 35, 0.22);
   font-family: inherit;
+  width: min(900px, calc(100vw - 2rem));
+  min-width: 0;
+  min-height: 0;
+  height: min(760px, calc(100dvh - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 1.25rem;
+  align-items: stretch;
+}
+
+.popup-card h3 {
+  margin: 0 0 0.75rem;
+  color: var(--navy);
+  font-size: 1.15rem;
+}
+
+.popup-card .search-wrapper {
+  width: 100%;
+  margin: 0 0 0.75rem;
+}
+
+.popup-card .sticker-search {
+  width: min(100%, 480px);
+  max-width: none;
+}
+
+.popup-sticker-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  align-content: start;
+  gap: 0.7rem;
+  flex: 1;
+  min-height: 0;
+  max-height: none;
+  margin: 0;
+  padding: 0.25rem 0.35rem 0.25rem 0.1rem;
+  justify-content: initial;
+}
+
+.popup-sticker-item {
+  min-width: 0;
+  padding: 0.55rem 0.4rem;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.popup-sticker-item .sticker-img {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 0.2rem;
+}
+
+.popup-qty-row {
+  margin: 0.75rem 0 0;
+  justify-content: center;
+}
+
+.popup-actions {
+  justify-content: center;
+  margin-top: 0.75rem;
 }
 
 .popup-sticker-item {
@@ -801,7 +868,7 @@ body {
 
 .popup-sticker-item.selected {
   border-color: var(--accent);
-  background: #fff1f3;
+  background: #edf8f4;
 }
 
 .sticker-select { font-family: inherit; }
@@ -849,4 +916,6 @@ body {
   .stickers-grid, .all-stickers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sticker-card { min-height: 170px; }
   .main-content { padding-inline: 1rem; }
+  .popup-card { width: calc(100vw - 1rem); height: calc(100dvh - 1rem); padding: 1rem; }
+  .popup-sticker-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }

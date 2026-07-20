@@ -52,7 +52,7 @@ function MainStickerManager({
   const percentOwned = ((ownedCount / totalStickers) * 100).toFixed(1);
 
   return (
-    <div className="app-container dreamscape-bg">
+    <div className="app-container dashboard-shell dreamscape-bg">
       <Header
         showAll={showAll}
         setShowAll={setShowAll}
