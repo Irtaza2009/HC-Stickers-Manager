@@ -19,7 +19,8 @@ function Header({
             ← Back
           </button>
           <h1 className="all-stickers-heading">
-            All Hack Club <span className="username">Stickers</span>!
+            All <span className="tape-label">Hack Club</span>{" "}
+            <span className="header-stickers">Stickers</span>!
           </h1>
         </>
       ) : (
@@ -30,10 +31,10 @@ function Header({
             rel="noopener noreferrer"
             className="share-link"
           >
-            Share Profile
+            Share profile <span aria-hidden="true">↗</span>
           </a>
           <h1>
-            Welcome, <span className="username">{username}</span>!{" "}
+            Welcome, <span className="crayon-name">{username}</span>!{" "}
             <span className="wave"></span>
           </h1>
           <div className="progress-container">

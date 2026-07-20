@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Schoolbell&display=swap");
+
 @font-face {
   font-family: "Mini Wakuwaku";
   src: url("../public/fonts/mini-wakuwaku.ttf.woff") format("woff");
@@ -551,6 +553,16 @@ body {
 
 .app-container {
   background: var(--canvas);
+  background-image:
+    radial-gradient(rgba(70, 98, 88, 0.075) 0.7px, transparent 0.7px),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 5px,
+      rgba(255, 255, 255, 0.4) 5px 6px
+    );
+  background-size:
+    13px 13px,
+    auto;
 }
 
 .dashboard-shell {
@@ -560,21 +572,122 @@ body {
 }
 
 .header {
-  padding: 1.4rem max(1.5rem, calc((100vw - 1120px) / 2));
+  padding: 0.85rem max(1.25rem, calc((100vw - 1120px) / 2));
   background: var(--paper);
   color: var(--navy);
   box-shadow: inset 0 -1px 0 var(--line);
-  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
   letter-spacing: -0.045em;
+  position: relative;
+  overflow: hidden;
 }
 
 .header h1 {
   margin: 0;
   font-weight: 760;
+  position: relative;
+  z-index: 1;
+}
+
+.header .progress-container,
+.header .share-link,
+.header .back-btn {
+  z-index: 1;
 }
 
 .username {
   color: var(--accent);
+}
+
+.header-stickers {
+  position: relative;
+  display: inline-block;
+  margin-inline: 0.04em;
+  color: #5e9f8f;
+  font-family: "Schoolbell", "Comic Sans MS", "Mini Wakuwaku", cursive;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  transform: rotate(-2deg);
+  text-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.9),
+    -1px 0 0 rgba(76, 133, 118, 0.17),
+    0 2px 0 rgba(76, 133, 118, 0.12);
+}
+
+.tape-label {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  margin: 0 0.1em;
+  padding: 0.08em 0.36em 0.12em;
+  color: #315d51;
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
+  font-size: 0.88em;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  transform: rotate(-1.4deg);
+}
+
+.tape-label::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -0.09em -0.2em -0.05em;
+  background: rgba(190, 224, 204, 0.82);
+  border-left: 1px solid rgba(92, 143, 124, 0.18);
+  border-right: 1px solid rgba(92, 143, 124, 0.18);
+  box-shadow: 0 2px 3px rgba(37, 71, 59, 0.12);
+  transform: rotate(0.7deg);
+}
+
+.crayon-name {
+  display: inline-block;
+  color: #5e9f8f;
+  font-family: "Schoolbell", "Comic Sans MS", "Mini Wakuwaku", cursive;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+  text-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.9),
+    -1px 0 rgba(76, 133, 118, 0.14);
+  transform: rotate(-1deg);
+}
+
+.header-stickers::after {
+  content: "";
+  position: absolute;
+  right: -0.18em;
+  bottom: -0.12em;
+  left: -0.08em;
+  height: 0.1em;
+  background: currentColor;
+  border-radius: 999px;
+  opacity: 0.45;
+  transform: rotate(-1deg);
+}
+
+.header::before,
+.header::after {
+  position: absolute;
+  color: #a8d8cb;
+  font-family: "Comic Sans MS", cursive;
+  font-size: 1.3rem;
+  font-weight: 800;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.header::before {
+  content: "✦";
+  top: 0.45rem;
+  left: 4%;
+  transform: rotate(-12deg);
+}
+.header::after {
+  content: "✷";
+  right: 4%;
+  bottom: 0.35rem;
+  transform: rotate(14deg);
 }
 
 .main-content {
@@ -583,6 +696,11 @@ body {
   padding: 2rem 1.25rem 3rem;
   overflow-y: auto;
   overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+
+.main-content::-webkit-scrollbar {
+  display: none;
 }
 
 .tabs-row {
@@ -623,16 +741,16 @@ body {
 .all-stickers-grid {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.7rem;
   justify-content: initial;
   margin-top: 0;
 }
 
 .sticker-card {
   width: auto;
-  min-height: 184px;
-  padding: 1rem;
+  min-height: 150px;
+  padding: 0.75rem;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -640,22 +758,26 @@ body {
 }
 
 .sticker-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) rotate(-0.7deg);
   border-color: #b9c3bd;
   box-shadow: 0 8px 16px rgba(23, 33, 42, 0.08);
 }
 
 .sticker-img {
-  width: 72px;
-  height: 72px;
+  width: 58px;
+  height: 58px;
   object-fit: contain;
   border-radius: 0;
   background: transparent;
 }
 
+.sticker-card:hover .sticker-img {
+  animation: sticker-bounce 0.35s ease-out both;
+}
+
 .sticker-name {
   color: var(--ink);
-  font-size: 0.93rem;
+  font-size: 0.84rem;
   font-weight: 650;
   line-height: 1.25;
 }
@@ -673,6 +795,11 @@ body {
 
 .plus-icon {
   font-size: 2rem;
+}
+
+.plus-card:hover .plus-icon {
+  transform: rotate(90deg);
+  transition: transform 0.25s ease;
 }
 
 .wishlist-btn,
@@ -709,11 +836,24 @@ body {
 }
 
 .footer {
-  padding: 1.25rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.85rem;
   background: var(--paper);
   color: var(--muted);
   box-shadow: inset 0 1px 0 var(--line);
   font-family: inherit;
+}
+
+.footer-note {
+  color: #55766c;
+  font-family: "Schoolbell", "Comic Sans MS", "Mini Wakuwaku", cursive;
+  font-size: 1.1em;
+  letter-spacing: 0.025em;
+}
+
+.footer-note .github-link {
+  color: #3e796a;
+  font-family: "Permanent Marker", "Comic Sans MS", cursive;
 }
 
 .github-link {
@@ -736,7 +876,7 @@ body {
 .progress-container {
   left: auto;
   transform: none;
-  margin: 0.75rem auto 0;
+  margin: 0.45rem auto 0;
 }
 
 .progress-label {
@@ -753,21 +893,49 @@ body {
 
 .progress {
   background: var(--accent);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.23) 0 7px,
+    transparent 7px 14px
+  );
 }
 
 .back-btn,
 .share-link {
-  top: 1.25rem;
-  background: var(--paper);
-  border: 1px solid var(--line);
-  color: var(--ink);
+  top: 0.75rem;
+  background: var(--accent);
+  border: 1px solid var(--accent-dark);
+  color: #fff;
   font-size: 0.85rem;
+  box-shadow: 0 2px 5px rgba(44, 99, 82, 0.16);
 }
 
-.back-btn { left: 1.25rem; }
-.share-link { right: 1.25rem; }
+.back-btn {
+  left: 1rem;
+}
+.share-link {
+  right: 1rem;
+}
 
-.search-wrapper { margin-bottom: 1rem; }
+.share-link:hover {
+  background: var(--accent-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.share-link span {
+  display: inline-block;
+  margin-left: 0.15rem;
+  transition: transform 0.2s ease;
+}
+
+.share-link:hover span {
+  transform: translate(2px, -2px);
+}
+
+.search-wrapper {
+  margin-bottom: 1rem;
+}
 
 .sticker-search {
   background: var(--paper);
@@ -790,9 +958,14 @@ body {
   color: #fff;
 }
 
-.search-button:hover { background: #33485d; color: #fff; }
+.search-button:hover {
+  background: #33485d;
+  color: #fff;
+}
 
-.popup-overlay { background: rgba(24, 34, 41, 0.48); }
+.popup-overlay {
+  background: rgba(24, 34, 41, 0.48);
+}
 
 .popup-card {
   background: var(--paper);
@@ -871,9 +1044,16 @@ body {
   background: #edf8f4;
 }
 
-.sticker-select { font-family: inherit; }
-.sticker-qty { background: var(--navy); font-family: inherit; }
-.update-icon { color: var(--muted); }
+.sticker-select {
+  font-family: inherit;
+}
+.sticker-qty {
+  background: var(--navy);
+  font-family: inherit;
+}
+.update-icon {
+  color: var(--muted);
+}
 
 .loading-screen,
 .profile-message {
@@ -885,6 +1065,12 @@ body {
   background: var(--canvas);
   color: var(--muted);
   font-weight: 600;
+}
+
+.profile-page .sticker-name,
+.profile-page h2 {
+  font-family: "Schoolbell", "Comic Sans MS", "Mini Wakuwaku", cursive;
+  letter-spacing: 0.025em;
 }
 
 .loading-mark {
@@ -902,20 +1088,73 @@ body {
   animation: sticker-loading 0.8s ease-in-out infinite alternate;
 }
 
-.loading-mark span:nth-child(2) { animation-delay: 0.16s; }
-.loading-mark span:nth-child(3) { animation-delay: 0.32s; }
+.loading-mark span:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.loading-mark span:nth-child(3) {
+  animation-delay: 0.32s;
+}
 
 @keyframes sticker-loading {
-  to { height: 2.4rem; opacity: 0.45; }
+  to {
+    height: 2.4rem;
+    opacity: 0.45;
+  }
+}
+
+@keyframes sticker-bounce {
+  50% {
+    transform: translateY(-5px) rotate(4deg) scale(1.06);
+  }
+  100% {
+    transform: translateY(0) rotate(0) scale(1);
+  }
 }
 
 @media (max-width: 600px) {
-  .header { padding: 1.25rem 1rem; }
-  .header h1 { max-width: 14rem; margin: 0 auto; }
-  .share-link, .back-btn { position: static; display: inline-block; margin-bottom: 1rem; }
-  .stickers-grid, .all-stickers-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .sticker-card { min-height: 170px; }
-  .main-content { padding-inline: 1rem; }
-  .popup-card { width: calc(100vw - 1rem); height: calc(100dvh - 1rem); padding: 1rem; }
-  .popup-sticker-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .header {
+    padding: 1.25rem 1rem;
+  }
+  .header h1 {
+    max-width: 14rem;
+    margin: 0 auto;
+  }
+  .share-link,
+  .back-btn {
+    position: static;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .stickers-grid,
+  .all-stickers-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .sticker-card {
+    min-height: 132px;
+    padding: 0.6rem 0.35rem;
+  }
+  .sticker-img {
+    width: 48px;
+    height: 48px;
+  }
+  .sticker-name {
+    font-size: 0.75rem;
+  }
+  .main-content {
+    padding-inline: 1rem;
+  }
+  .popup-card {
+    width: calc(100vw - 1rem);
+    height: calc(100dvh - 1rem);
+    padding: 1rem;
+  }
+  .popup-sticker-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .header::before {
+    left: 0.65rem;
+  }
+  .header::after {
+    right: 0.65rem;
+  }
 }

@@ -196,7 +196,8 @@ function App() {
             <div className="app-container dreamscape-bg">
               <header className="header dreamscape-header">
                 <h1>
-                  Hack Club <span className="username">Stickers</span> Manager
+                  <span className="tape-label">Hack Club</span>{" "}
+                  <span className="header-stickers">Stickers</span> Manager
                 </h1>
               </header>
               <div className="centered">

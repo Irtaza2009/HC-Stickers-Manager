@@ -58,7 +58,7 @@ function ProfilePage() {
     : 0;
 
   return (
-    <div className="app-container dreamscape-bg">
+    <div className="app-container profile-page dreamscape-bg">
       <a
         href={`https://stickers.irtaza.xyz/`}
         target="_blank"
@@ -69,8 +69,8 @@ function ProfilePage() {
       </a>
       <header className="header dreamscape-header">
         <h1>
-          <span className="username">{profile.name || profile.username}</span>'s
-          Sticker Collection
+          <span className="crayon-name">{profile.name || profile.username}</span>'s
+          <span className="header-stickers">Sticker</span> Collection
         </h1>
         <div className="progress-container">
           <div className="progress-label">
